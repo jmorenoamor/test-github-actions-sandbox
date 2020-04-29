@@ -17,7 +17,7 @@ jobs:
       id: step1
       uses: jmorenoamor/test-github-python-action@master
     outputs:
-      result: ASDF
+      result: ${{steps.step1.result}}
 
   python_script_2:
     name: Test python action 2
