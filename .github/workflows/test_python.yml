@@ -17,7 +17,7 @@ jobs:
       id: step1
       uses: jmorenoamor/test-github-python-action@master
     outputs:
-      result: ${{steps.step1.result}}
+      result: ASDF
 
   python_script_2:
     name: Test python action 2
@@ -28,7 +28,7 @@ jobs:
       id: step1
       uses: jmorenoamor/test-github-python-action@master
       with:
-        parameter: XXXXXXXXXXX
+        parameter: ${{needs.python_script_1.result.outputs.result}}
 
     # - name: Run a multi-line script
     #   run: |
