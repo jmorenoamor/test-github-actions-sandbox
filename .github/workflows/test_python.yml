@@ -3,6 +3,8 @@ name: Test Python
 on:
   push:
     branches: [ master ]
+  issue_comment:
+    types: [edited]
 
 jobs:
   test_python:
