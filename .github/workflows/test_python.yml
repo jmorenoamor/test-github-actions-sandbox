@@ -7,19 +7,30 @@ on:
     types: [edited]
 
 jobs:
-  test_python:
-    name: Test python action
+  python_script_1:
+    name: Test python action 1
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v2
-
     - name: Run python container
-      id: run_python_container
+      id: step1
       uses: jmorenoamor/test-github-python-action@master
+    outputs:
+      result: ${{steps.step1.result}}
 
-    - name: Run a multi-line script
-      run: |
-        echo "::set-output name=action_fruit::strawberry"
-        echo "::warning file=app.js,line=1,col=5::Missing semicolon"
-        echo "::debug file=app.js,line=1::Entered octocatAddition method"
-        echo "::error file=app.js,line=10,col=15::Something went wrong"
+  python_script_2:
+    name: Test python action 2
+    runs-on: ubuntu-latest
+    - uses: actions/checkout@v2
+    - name: Run python container
+      needs: python_script_1
+      uses: jmorenoamor/test-github-python-action@master
+      with:
+        - parameter: ${{needs.python_script_1.result.outputs.result}}
+
+    # - name: Run a multi-line script
+    #   run: |
+    #     echo "::set-output name=action_fruit::strawberry"
+    #     echo "::warning file=app.js,line=1,col=5::Missing semicolon"
+    #     echo "::debug file=app.js,line=1::Entered octocatAddition method"
+    #     echo "::error file=app.js,line=10,col=15::Something went wrong"
