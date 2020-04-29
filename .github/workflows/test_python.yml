@@ -28,7 +28,7 @@ jobs:
       id: step1
       uses: jmorenoamor/test-github-python-action@master
       with:
-        parameter: ${{needs.python_script_1.result.outputs.result}}
+        parameter: ${{needs.python_script_1.outputs.result}}
 
     # - name: Run a multi-line script
     #   run: |
