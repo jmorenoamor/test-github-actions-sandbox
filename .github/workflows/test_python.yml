@@ -21,14 +21,14 @@ jobs:
 
   python_script_2:
     name: Test python action 2
+    needs: python_script_1
     runs-on: ubuntu-latest
     steps:
     - name: Run python container
       id: step1
-      # needs: python_script_1
       uses: jmorenoamor/test-github-python-action@master
       with:
-        - parameter: ${{needs.python_script_1.result.outputs.result}}
+        parameter: ${{needs.python_script_1.result.outputs.result}}
 
     # - name: Run a multi-line script
     #   run: |
