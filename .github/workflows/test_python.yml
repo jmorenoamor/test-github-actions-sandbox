@@ -25,7 +25,7 @@ jobs:
     steps:
     - name: Run python container
       id: step1
-      needs: python_script_1
+      # needs: python_script_1
       uses: jmorenoamor/test-github-python-action@master
       with:
         - parameter: ${{needs.python_script_1.result.outputs.result}}
