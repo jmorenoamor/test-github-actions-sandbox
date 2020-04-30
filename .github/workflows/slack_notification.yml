@@ -1,0 +1,22 @@
+name: Notify Slack
+
+on:
+  project_card:
+    types: edited
+
+jobs:
+  notify:
+    name: Notify to Slack channel
+    runs-on: ubuntu-latest
+    steps:
+    - name: Send notification
+    - uses: 8398a7/action-slack@v3
+      with:
+        status: Estado
+        fields: repo,message,commit,author,action,eventName,ref,workflow
+        author_name: Author name
+        text: Text of the notification
+      env:
+        # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        SLACK_WEBHOOK_URL: ${{ secrets.SLACK_WEBHOOK_URL }}
+      if: always()

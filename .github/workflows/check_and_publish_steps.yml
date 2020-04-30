@@ -1,0 +1,50 @@
+name: Test Python
+
+on:
+  push:
+    branches: [ dev ]
+
+jobs:
+  check_publish_test:
+    name: Check and publish product
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Check code quality
+      id: check
+      uses: jmorenoamor/test-github-python-action@master
+
+    - name: Publish
+      id: publish
+      uses: jmorenoamor/api-connect-deploy-action@master
+      with:
+        productFile: product/resourceinventory.yaml
+        catalog: sandbox
+        organization: localtest
+        managerHost: ${{ secrets.API_MANAGER_HOST }}
+        managerUsername: ${{ secrets.API_MANAGER_USERNAME }}
+        managerPassword: ${{ secrets.API_MANAGER_PASSWORD }}
+        managerRealm: provider/default-idp-2
+
+    - name: Test
+      id: test
+      uses: matt-ball/newman-action@master
+      with:
+        postmanApiKey: ${{ secrets.POSTMAN_API_KEY }}
+        collection: 9010602-1ba0178e-0336-455d-8743-a8d67e76058f
+        environment: 9010602-32bb0d51-a0c0-4284-bd4b-540537747662
+        timeoutRequest: 3000
+        insecure: true
+
+
+
+        # parameter: ${{needs.python_script_1.outputs.result}}
+
+    # - name: Run a multi-line script
+    #   run: |
+    #     echo "::set-output name=action_fruit::strawberry"
+    #     echo "::warning file=app.js,line=1,col=5::Missing semicolon"
+    #     echo "::debug file=app.js,line=1::Entered octocatAddition method"
+    #     echo "::error file=app.js,line=10,col=15::Something went wrong"
