@@ -1,6 +1,8 @@
 name: Notify Slack
 
 on:
+  push:
+    branches: [ master ]
   project_card:
     types: edited
 
@@ -15,6 +17,8 @@ jobs:
         status: ${{ job.status }}
         fields: repo,message,commit,author,action,eventName,ref,workflow
         author_name: Author name
+        icon_emoji: ":inexpresivo:"
+        # icon_url: 
         text: Text of the notification
       env:
         # GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
