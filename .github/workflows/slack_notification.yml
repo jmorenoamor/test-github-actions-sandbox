@@ -12,7 +12,6 @@ jobs:
     - name: Send notification
       uses: 8398a7/action-slack@v3
       with:
-        status: Estado
         fields: repo,message,commit,author,action,eventName,ref,workflow
         author_name: Author name
         text: Text of the notification
