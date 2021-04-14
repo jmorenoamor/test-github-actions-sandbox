@@ -2,7 +2,9 @@ name: Docker Meta V2
 
 on:
   push:
-    branches: master
+    branches:
+      - development
+      - master
 
 jobs:
   main:
