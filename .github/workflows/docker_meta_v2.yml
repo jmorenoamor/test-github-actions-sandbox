@@ -7,7 +7,9 @@ on:
       - master
 
 jobs:
-  main:
+
+  meta1:
+    name: Docker meta 1
     runs-on: ubuntu-latest
     steps:
       -
@@ -22,6 +24,22 @@ jobs:
             type=edge
             type=ref,event=tag
             type=ref,event=pr
+            type=raw,value=personalizada
+          flavor: |
+            latest=${{ github.ref == 'refs/heads/master' }}
+
+  meta2:
+    name: Docker meta 2
+    needs: meta1
+    runs-on: ubuntu-latest
+    steps:
+      -
+        name: Docker meta
+        id: meta
+        uses: crazy-max/ghaction-docker-meta@v2
+        with:
+          images: registry.morenoamor.com/sample-image2
+          tags: |
             type=raw,value=personalizada
           flavor: |
             latest=${{ github.ref == 'refs/heads/master' }}
