@@ -17,6 +17,11 @@ jobs:
         with:
           images: registry.morenoamor.com/sample-image
           tags: |
+            type=schedule
             type=ref,event=branch
+            type=edge
+            type=ref,event=tag
+            type=ref,event=pr
+            type=raw,value=personalizada
           flavor: |
             latest=${{ github.ref == 'refs/heads/master' }}
