@@ -2,7 +2,7 @@ name: Notify Slack
 
 on:
   push:
-    branches: [ master ]
+    branches: [ asdf ]
   project_card:
     types: edited
 

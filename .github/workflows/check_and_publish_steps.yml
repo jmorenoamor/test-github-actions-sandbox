@@ -2,7 +2,7 @@ name: Test Python
 
 on:
   push:
-    branches: [ dev ]
+    branches: [ asdf ]
 
 jobs:
   check_publish_test:

@@ -2,7 +2,7 @@ name: Test Python
 
 on:
   push:
-    branches: [ dev ]
+    branches: [ asdf ]
   issue_comment:
     types: [edited]
 
