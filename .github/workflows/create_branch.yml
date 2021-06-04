@@ -20,4 +20,4 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
-          branch: 'rc.{{ github.event.inputs.rc_number }}'
+          branch: 'rc.${{ github.event.inputs.rc_number }}'
