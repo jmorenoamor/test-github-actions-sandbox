@@ -1,0 +1,23 @@
+name: Create release candidate branch
+
+on:
+  workflow_dispatch:
+    inputs:
+      rc_number:
+        description: 'Release Candidate'
+        required: true
+        default: '1'
+
+jobs:
+  main:
+    runs-on: ubuntu-latest
+    name: Create release candidate branch
+    steps:
+      -
+        # https://github.com/marketplace/actions/create-branch
+        name: Create Branch
+        uses: peterjgrainger/action-create-branch@v2.0.1
+        # env:
+        #   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          branch: 'rc.{{ github.event.inputs.rc_number }}'
